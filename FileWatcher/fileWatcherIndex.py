@@ -1,5 +1,5 @@
 from enum import Enum
-from .AbstractFileWatcher import BaseFileWatcher
+from FileWatcher.AbstractFileWatcher.AbstractFileWatcher import AbstractFileWatcher
 
 
 class FileWatcherStrategies(Enum):
@@ -26,9 +26,9 @@ class FileWatcherStrategies(Enum):
 
 class FileWatcherFactory:
     @staticmethod
-    def get_strategy(p_strategy=FileWatcherStrategies.WATCHDOG) -> BaseFileWatcher:
+    def get_strategy(p_strategy=FileWatcherStrategies.WATCHDOG) -> AbstractFileWatcher:
         strategy_switch = {
-            FileWatcherStrategies.WATCHDOG: BaseFileWatcher,
+            FileWatcherStrategies.WATCHDOG: AbstractFileWatcher,
         }
 
 

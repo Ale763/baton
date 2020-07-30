@@ -2,9 +2,9 @@ from watchdog.events import FileSystemEventHandler, FileSystemMovedEvent
 from datetime import datetime
 
 
-class BaseEventHandler(FileSystemEventHandler):
+class AbstractEventHandler(FileSystemEventHandler):
     @staticmethod
-    def __get_time() -> str:
+    def get_time() -> str:
         now = datetime.now()
         return now.strftime("%m/%d/%Y, %H:%M:%S")
 

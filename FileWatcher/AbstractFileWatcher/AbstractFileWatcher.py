@@ -5,7 +5,7 @@ from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler
 
 
-class BaseFileWatcher:
+class AbstractFileWatcher:
     def __init__(self, p_root_dir):
         self.root_dir = p_root_dir
 

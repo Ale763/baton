@@ -1,14 +1,12 @@
-import sys
 import time
 import logging
 from watchdog.observers import Observer
-from watchdog.events import LoggingEventHandler
-from FileWatcher.AbstractFileWatcher import BaseFileWatcher
+from FileWatcher.AbstractFileWatcher.AbstractFileWatcher import AbstractFileWatcher
 from FileWatcher.WatchdogFileWatcher.WatchdogEventHandler import WatchdogEventHandler
 
 
 
-class WatchdogFileWatcher(BaseFileWatcher):
+class WatchdogFileWatcher(AbstractFileWatcher):
     def __init__(self, p_root_dir):
         super().__init__(p_root_dir)
 

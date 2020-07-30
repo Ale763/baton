@@ -8,7 +8,7 @@ from FileWatcher.fileWatcherIndex import *
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    file_watcher_strategy = WatchdogFileWatcher("C:\\Users\\aless\\Documents\\BatonTest")
+    file_watcher_strategy = WatchdogFileWatcher("/Users/ale/Documents/BatonTest")
     file_watcher_strategy.monitor()
 
 
