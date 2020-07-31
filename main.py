@@ -9,14 +9,20 @@ import queue
 import time
 from typing import Dict
 import threading
-ROOT_DIR = "/Users/ale/Documents/BatonTest"
-# ROOT_DIR = "C:\\Users\\aless\\Documents\\BatonTest"
+
+from Indexer.TreeStrategies.BaseTree import BaseTree
+
+# ROOT_DIR = "/Users/ale/Documents/BatonTest"
+ROOT_DIR = "C:\\Users\\aless\\Documents\\BatonTest"
 
 
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    event_queue = queue.Queue()
-    file_watcher_strategy = WatchdogFileWatcher(ROOT_DIR)
+    # event_queue = queue.Queue()
+    # file_watcher_strategy = WatchdogFileWatcher(ROOT_DIR)
+    tree = BaseTree()
+    tree.parse_from_dir(ROOT_DIR)
+    print("done")
 
