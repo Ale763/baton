@@ -1,5 +1,5 @@
 from FileWatcher.AbstractFileWatcher.AbstractFileWatcher import AbstractFileWatcher
-from FileWatcher.WatchdogFileWatcher.WatchdogEventHandlerThread import WatchdogEventHandlerThread
+from FileWatcher.Watchdog.WatchdogEventHandlerThread import WatchdogEventHandlerThread
 import queue
 import time
 from typing import Dict

@@ -2,7 +2,7 @@ import threading
 import time
 import logging
 from watchdog.observers import Observer
-from FileWatcher.WatchdogFileWatcher.WatchdogEventHandler import *
+from FileWatcher.Watchdog.WatchdogEventHandler import *
 
 
 class WatchdogEventHandlerThread(threading.Thread):
