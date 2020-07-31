@@ -1,28 +1,29 @@
-import time
-import logging
-from watchdog.observers import Observer
 from FileWatcher.AbstractFileWatcher.AbstractFileWatcher import AbstractFileWatcher
-from FileWatcher.WatchdogFileWatcher.WatchdogEventHandler import WatchdogEventHandler
-
+from FileWatcher.WatchdogFileWatcher.WatchdogEventHandlerThread import WatchdogEventHandlerThread
+import queue
+import time
+from typing import Dict
+import threading
 
 
 class WatchdogFileWatcher(AbstractFileWatcher):
-    def __init__(self, p_root_dir):
+    def __init__(self, p_root_dir: str):
         super().__init__(p_root_dir)
+        self.queue = queue.Queue()
+        self.event_handler: WatchdogEventHandlerThread = WatchdogEventHandlerThread(self.root_dir, self.queue)
+        self.event_handler.start()
 
-    def monitor(self) -> None:
-        logging.basicConfig(level=logging.INFO,
-                            format='%(asctime)s - %(message)s',
-                            datefmt='%Y-%m-%d %H:%M:%S')
-        path = self.root_dir
-        # event_handler = LoggingEventHandler()
-        event_handler = WatchdogEventHandler()
-        observer = Observer()
-        observer.schedule(event_handler, path, recursive=True)
-        observer.start()
-        try:
-            while True:
-                time.sleep(100)
-        except KeyboardInterrupt:
-            observer.stop()
-        observer.join()
+        self.event_batch_processor = None
+        printer_worker = threading.Thread(name='printer', target=self.printer)
+        printer_worker.start()
+
+    def printer(self):
+        while True:
+            if not self.queue.empty():
+                print("Printer queue:")
+                batch: Dict[str, queue.Queue] = self.queue.get()
+                for key in batch:
+                    print("{0}: {1}".format(key, batch[key]))
+                    while not batch[key].empty():
+                        print("\t{0}".format(batch[key].get()))
+            time.sleep(10)
